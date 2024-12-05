@@ -41,7 +41,7 @@ Docker и Docker Compose.
 
 Перейдите в View > Tool Windows > Maven.
 
-В меню Maven выберите Lifecycle и дважды щелкните на clean и затем на package, чтобы выполнить сборку.
+В меню Maven выберите Lifecycle и дважды щелкните на clean и затем на install, чтобы выполнить сборку.
 
 А потом выполните команду:
 
