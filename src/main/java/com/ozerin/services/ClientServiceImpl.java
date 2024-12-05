@@ -34,4 +34,9 @@ public class ClientServiceImpl implements ClientService{
     public Client getByFullNameOrPassportDataOrPhone(String query) {
         return clientRepository.findByFullNameOrPassportDataOrPhone(query);
     }
+
+    @Transactional
+    public List<Client> getListByFullNameOrPassportDataOrPhone(String query) {
+        return clientRepository.findListByFullNameOrPassportDataOrPhone(query);
+    }
 }

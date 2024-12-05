@@ -9,5 +9,6 @@ public interface ClientService {
     List<Client> getAllClients();
     Client getById(Long id);
     Client getByFullNameOrPassportDataOrPhone(String query);
+    List<Client> getListByFullNameOrPassportDataOrPhone(String query);
 
 }

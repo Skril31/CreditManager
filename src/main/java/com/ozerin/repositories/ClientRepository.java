@@ -8,5 +8,6 @@ public interface ClientRepository {
     List<Client> findAll();
     Client findById(Long id);
     Client findByFullNameOrPassportDataOrPhone(String query);
+    List<Client> findListByFullNameOrPassportDataOrPhone(String query);
 
 }

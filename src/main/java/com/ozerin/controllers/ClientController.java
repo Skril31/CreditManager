@@ -24,7 +24,7 @@ public class ClientController {
     @GetMapping("/searchClient")
     public String clientSearch(@RequestParam(value = "query",  required = false) String query, Model model){
         if (query != null && !query.trim().isEmpty()) {
-            model.addAttribute("client", clientService.getByFullNameOrPassportDataOrPhone(query));
+            model.addAttribute("searchClient", clientService.getListByFullNameOrPassportDataOrPhone(query));
         }
         return "searchClient";
     }

@@ -46,4 +46,15 @@ public class ClientRepositoryImpl implements ClientRepository{
             return null;
         }
     }
+
+    @Override
+    public List<Client> findListByFullNameOrPassportDataOrPhone(String query) {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            return session.createQuery("from Client where fullName = :query or passportData = :query or phone = :query", Client.class).
+                    setParameter("query", query).getResultList();
+        }catch (NoResultException e){
+            return null;
+        }
+    }
 }

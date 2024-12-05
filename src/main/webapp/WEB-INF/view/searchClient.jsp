@@ -12,7 +12,7 @@
   <input type="submit" value="Найти">
 </form>
 
-<c:if test="${not empty client}">
+<c:if test="${not empty searchClient}">
   <h2>Результаты поиска:</h2>
   <table border="1">
     <tr>
@@ -23,12 +23,14 @@
       <th>Семейное положение</th>
     </tr>
     <tr>
+      <c:forEach var="client" items="${searchClient}">
       <td>${client.fullName}</td>
       <td>${client.passportData}</td>
       <td>${client.phone}</td>
       <td>${client.address}</td>
       <td>${client.maritalStatus}</td>
     </tr>
+    </c:forEach>
   </table>
 </c:if>
 <br>
