@@ -6,10 +6,24 @@
 </head>
 <body>
 <h1>Заявки на кредит</h1>
+
+<!-- Форма для фильтрации -->
+<form action="<c:url value='/applications'/>" method="get">
+  <label for="status">Фильтр по статусу:</label>
+  <select name="status" id="status">
+    <option value="">Все</option>
+    <option value="Одобрен" ${param.status == 'Одобрен' ? 'selected' : ''}>Одобрен</option>
+    <option value="Не одобрен" ${param.status == 'Не одобрен' ? 'selected' : ''}>Не одобрен</option>
+  </select>
+  <input type="submit" value="Применить фильтр">
+</form>
+
+<br>
+
 <table border="1">
   <tr>
     <th>ФИО</th>
-    <th>Пасспортные данные</th>
+    <th>Паспортные данные</th>
     <th>Номер телефона</th>
     <th>Адрес</th>
     <th>Семейное положение</th>
@@ -38,6 +52,7 @@
     </tr>
   </c:forEach>
 </table>
+
 <br>
 <a href="<c:url value='/'/>">На главную</a>
 </body>

@@ -8,5 +8,6 @@ import java.util.List;
 public interface CreditApplicationRepository {
     CreditApplication save(CreditApplication creditApplication);
     List<CreditApplication> findAll();
+    List<CreditApplication> findByStatus(String status);
 
 }

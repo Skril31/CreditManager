@@ -30,5 +30,10 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
         return session.createQuery("from CreditApplication", CreditApplication.class).getResultList();
     }
 
-
+    @Override
+    public List<CreditApplication> findByStatus(String status) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from CreditApplication where status = :status", CreditApplication.class).
+                setParameter("status", status).getResultList();
+    }
 }

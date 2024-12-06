@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2024-12-05 19:04:58
+-- Started on 2024-12-06 12:15:39
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -56,7 +56,7 @@ CREATE SEQUENCE public.clients_id_seq
 ALTER TABLE public.clients_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3349 (class 0 OID 0)
+-- TOC entry 3351 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -101,7 +101,7 @@ CREATE SEQUENCE public.credit_application_id_seq
 ALTER TABLE public.credit_application_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3350 (class 0 OID 0)
+-- TOC entry 3352 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: credit_application_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -141,7 +141,7 @@ CREATE SEQUENCE public.credit_contracts_id_seq
 ALTER TABLE public.credit_contracts_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3351 (class 0 OID 0)
+-- TOC entry 3353 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: credit_contracts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -174,68 +174,78 @@ ALTER TABLE ONLY public.credit_contracts ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3339 (class 0 OID 41846)
+-- TOC entry 3341 (class 0 OID 41846)
 -- Dependencies: 215
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.clients (id, full_name, passport_data, marital_status, address, phone) FROM stdin;
-10	Озерин Александр Родионович	1822236548	Женат	Советская 25	+76053265415
-14	Демин Евгений Игоревич	1565523214	Не женат	Северная 7	+78005553535
+22	Озерин Александр Родионович	1822256346	Не женат	Северная 7	+79093861300
+23	Хасанов Роман Рустамович	1566265412	Не женат	Советская 25	+76053265415
+24	Леоненко Василий Павлович	1788256894	Женат	Металлургов,15а	+79086053145
 \.
 
 
 --
--- TOC entry 3341 (class 0 OID 41857)
+-- TOC entry 3343 (class 0 OID 41857)
 -- Dependencies: 217
 -- Data for Name: credit_application; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.credit_application (id, client_id, employment_period, job_position, organization_name, desired_amount, approved_amount, status, payment_term) FROM stdin;
-12	14	с 20.05.2020 по 14.06.2022	Менеджер	Яндекс	1000000	800000	Одобрен	300
-13	10	123	Тех лид	Макдональс	232113	185690	Одобрен	360
-14	14	12	Кассир	Макдональс	2333333	\N	Не одобрен	\N
+23	22	с 07.06.2023 по 31.08.2023	Мл. разработчик	Сигма	500000	400000	Одобрен	330
+24	23	с 25.08.2020 по 23.02.2024	Официант	Макдональс	1000000	800000	Одобрен	180
+25	24	с 01.05.2008 по 08.09.2018	Грузчик	Вайлдберис	700000	\N	Не одобрен	\N
 \.
 
 
 --
--- TOC entry 3343 (class 0 OID 41871)
+-- TOC entry 3345 (class 0 OID 41871)
 -- Dependencies: 219
 -- Data for Name: credit_contracts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.credit_contracts (id, credit_application_id, sign_date, signature_status) FROM stdin;
-10	12	2024-12-05	Подписан
-11	13	2024-12-05	Подписан
-12	14	\N	Не подписан
+22	24	\N	Не подписан
+21	23	2024-12-06	Подписан
+23	25	\N	Не подписан
 \.
 
 
 --
--- TOC entry 3352 (class 0 OID 0)
+-- TOC entry 3354 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.clients_id_seq', 17, true);
+SELECT pg_catalog.setval('public.clients_id_seq', 24, true);
 
 
 --
--- TOC entry 3353 (class 0 OID 0)
+-- TOC entry 3355 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: credit_application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.credit_application_id_seq', 18, true);
+SELECT pg_catalog.setval('public.credit_application_id_seq', 25, true);
 
 
 --
--- TOC entry 3354 (class 0 OID 0)
+-- TOC entry 3356 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: credit_contracts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.credit_contracts_id_seq', 16, true);
+SELECT pg_catalog.setval('public.credit_contracts_id_seq', 23, true);
+
+
+--
+-- TOC entry 3193 (class 2606 OID 41895)
+-- Name: credit_contracts app_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.credit_contracts
+    ADD CONSTRAINT app_uniq UNIQUE (credit_application_id);
 
 
 --
@@ -257,7 +267,7 @@ ALTER TABLE ONLY public.credit_application
 
 
 --
--- TOC entry 3193 (class 2606 OID 41876)
+-- TOC entry 3195 (class 2606 OID 41876)
 -- Name: credit_contracts credit_contracts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -275,7 +285,7 @@ ALTER TABLE ONLY public.clients
 
 
 --
--- TOC entry 3194 (class 2606 OID 41865)
+-- TOC entry 3196 (class 2606 OID 41865)
 -- Name: credit_application clients_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -284,7 +294,7 @@ ALTER TABLE ONLY public.credit_application
 
 
 --
--- TOC entry 3195 (class 2606 OID 41877)
+-- TOC entry 3197 (class 2606 OID 41877)
 -- Name: credit_contracts credit_application_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -292,7 +302,7 @@ ALTER TABLE ONLY public.credit_contracts
     ADD CONSTRAINT credit_application_fk FOREIGN KEY (credit_application_id) REFERENCES public.credit_application(id);
 
 
--- Completed on 2024-12-05 19:04:58
+-- Completed on 2024-12-06 12:15:40
 
 --
 -- PostgreSQL database dump complete

@@ -11,7 +11,7 @@
     <li><a href="<c:url value='/clientsList'/>">Список всех клиентов</a></li>
     <li><a href="<c:url value='/searchClient'/>">Поиск клиента</a></li>
     <li><a href="<c:url value='/applications'/>">Список заявок</a></li>
-    <li><a href="<c:url value='/signedContracts'/>">Список подписанных договоров</a></li>
+    <li><a href="<c:url value='/contracts'/>">Список договоров</a></li>
 </ul>
 </body>
 </html>

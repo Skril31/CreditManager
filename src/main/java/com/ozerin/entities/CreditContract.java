@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "credit_contracts")
@@ -14,7 +13,7 @@ public class CreditContract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "credit_application_id", nullable = false)
     private CreditApplication creditApplication;
     @Column(name = "sign_date")

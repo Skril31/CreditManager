@@ -27,4 +27,9 @@ public class CreditApplicationServiceImpl implements CreditApplicationService{
     public List<CreditApplication> getCreditApplications() {
         return creditApplicationRepository.findAll();
     }
+
+    @Transactional
+    public List<CreditApplication> getByStatus(String status) {
+        return creditApplicationRepository.findByStatus(status);
+    }
 }

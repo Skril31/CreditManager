@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class CreditApplicationController {
 
@@ -53,8 +55,14 @@ public class CreditApplicationController {
 
     }
     @GetMapping("/applications")
-    public String showApplications(Model model){
-        model.addAttribute("applications", creditApplicationService.getCreditApplications());
+    public String showApplications(@RequestParam(value = "status", required = false) String status,Model model){
+        List<CreditApplication> applications;
+        if (status == null || status.isEmpty()) {
+            applications = creditApplicationService.getCreditApplications();
+        } else {
+            applications = creditApplicationService.getByStatus(status);
+        }
+        model.addAttribute("applications", applications);
         return "applications";
     }
 }

@@ -29,4 +29,23 @@ public class CreditContractRepositoryImpl implements CreditContractRepository{
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from CreditContract where signatureStatus = 'Подписан'").getResultList();
     }
+
+    @Override
+    public List<CreditContract> findBySignatureStatus(String status) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from CreditContract where signatureStatus = :status", CreditContract.class).
+                setParameter("status", status).getResultList();
+    }
+
+    @Override
+    public List<CreditContract> findAll() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from CreditContract", CreditContract.class).getResultList();
+    }
+
+    @Override
+    public CreditContract findById(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.find(CreditContract.class, id);
+    }
 }

@@ -15,22 +15,42 @@ public class CreditContractServiceImpl implements CreditContractService{
     private CreditContractRepository creditContractRepository;
     @Transactional
     public CreditContract saveCreditContract(CreditContract creditContract) {
-        this.signCreditContract(creditContract);
+        creditContract.setSignatureStatus("Не подписан");
         return creditContractRepository.save(creditContract);
     }
     @Transactional
-    public CreditContract signCreditContract(CreditContract creditContract){
-        if (creditContract.getCreditApplication().getStatus().equals("Одобрен")){
-            creditContract.setSignatureStatus("Подписан");
-            creditContract.setSignDate(LocalDate.now());
-        }else {
-            creditContract.setSignatureStatus("Не подписан");
+    public void signCreditContract(Long id){
+        CreditContract contract = creditContractRepository.findById(id);
+        if (contract == null){
+            throw new IllegalArgumentException("Invalid contract ID: " + id);
         }
-        return creditContract;
+        if ("Не подписан".equals(contract.getSignatureStatus())) {
+            contract.setSignatureStatus("Подписан");
+            contract.setSignDate(java.time.LocalDate.now()); // Устанавливаем текущую дату подписания
+            creditContractRepository.save(contract);
+        }
     }
     @Override
     @Transactional
     public List<CreditContract> getSignedCreditContracts() {
         return creditContractRepository.findSignedContracts();
+    }
+
+    @Override
+    @Transactional
+    public List<CreditContract> getByStatus(String status) {
+        return creditContractRepository.findBySignatureStatus(status);
+    }
+
+    @Override
+    @Transactional
+    public List<CreditContract> getAll() {
+        return creditContractRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public CreditContract getById(Long id) {
+        return creditContractRepository.findById(id);
     }
 }
